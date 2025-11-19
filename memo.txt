@@ -21,3 +21,8 @@ const [params, setParams] = useSearchParams();
 console.log(params.get("value"))   
 
 동적 페이지 이동은 useNavigate 사용으로 Link로 연결
+
+### 이미지를 assets 경로에 넣은건 최적화를 위해서 (DATA URL로 캐싱되어 매번 불러오지 않음)
+이미지가 엄청 많으면 경우가 또 다르니 그때는 public에 저장하는게 나음 소수의 이미지일때 assets
+- public인 경우 -> <img src={"/emotion1.png"} />
+- assets인 경우 -> import 로 불러온다음 <img src={emotion1} /> 
