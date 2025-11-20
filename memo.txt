@@ -26,3 +26,7 @@ console.log(params.get("value"))
 이미지가 엄청 많으면 경우가 또 다르니 그때는 public에 저장하는게 나음 소수의 이미지일때 assets
 - public인 경우 -> <img src={"/emotion1.png"} />
 - assets인 경우 -> import 로 불러온다음 <img src={emotion1} /> 
+
+useState 보단 상태관리를 useReducer로 외부로 관리
+
+초기 기존데이터 값이 있으므로 id 값을 활용하기 위해 useRef 사용
