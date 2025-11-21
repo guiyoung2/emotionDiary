@@ -30,3 +30,11 @@ console.log(params.get("value"))
 useState 보단 상태관리를 useReducer로 외부로 관리
 
 초기 기존데이터 값이 있으므로 id 값을 활용하기 위해 useRef 사용
+
+메인 home 페이지의 header 부분 먼저 UI 설정 그 다음 DiaryList 부분 Ui, 다음 DiaryItem UI 설정
+
+home.jsx 에서 onIncreaseMonth, onDecreaseMonth 기능을 추가함으로 해더부분의 날짜 이동 기능 추가한다음
+useContext 로 props 받아와서 getMonthlyData 함수인 해당달의 첫 시간과 끝 시간사이로 filter 해서 표시
+
+DiaryList.jsx에서 toSorted 를 사용해서 최신순 오래된순을 정렬 
+
