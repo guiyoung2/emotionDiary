@@ -38,3 +38,12 @@ useContext 로 props 받아와서 getMonthlyData 함수인 해당달의 첫 시�
 
 DiaryList.jsx에서 toSorted 를 사용해서 최신순 오래된순을 정렬 
 
+new 페이지는 우선 디자인에 따라서 먼저 UI부터 구현
+Editor.jsx 에서 useState 를 객체로 만들어서 여러 데이터를 한번에 담음
+input 에서 그냥 new Date()로 하면 value 값을 이해 못하므로 getStringedDate 함수를 만들어서
+값을 넣어줌
+
+Editor.jsx 에서 useContext 로 onCreate를 바로 사용안하는 이유는 해당 페이지 에서만 쓰는게아니라 
+수정페이지등 다른곳에서도 공통으로 데이터를 쓰기때문에 props로 New.jsx에서 onCreate 사용
+
+useNavigate에서 nav값안데 뒤에 인수로 replace속성은 뒤로가기 방지 역할
