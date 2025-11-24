@@ -47,3 +47,10 @@ Editor.jsx 에서 useContext 로 onCreate를 바로 사용안하는 이유는 �
 수정페이지등 다른곳에서도 공통으로 데이터를 쓰기때문에 props로 New.jsx에서 onCreate 사용
 
 useNavigate에서 nav값안데 뒤에 인수로 replace속성은 뒤로가기 방지 역할
+
+Edit.jsx에서 삭제하기 클릭시 경고문으로 window.confirm 사용
+
+useDiary라는 useEffect 와 useState를 같이 사용한 함수를 여러곳에서 쓰는데 이걸 export 할 수가 없으니
+따로 hooks폴더에 커스텀 훅으로 만들어서 사용 
+
+getStringedDate라는 복잡한 날짜 형식의 함수도 공통으로 사용되어서 따로 util 폴더에 넣어서 사용
