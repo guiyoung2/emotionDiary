@@ -35,37 +35,40 @@ React와 React Router를 활용한 SPA(Single Page Application)로 구현되어 
 ```
 emotionDiary/
 ├── src/
+│   ├── type/               # 타입 폴더
+│   │   ├── index.ts        # 타입 정리
 │   ├── pages/              # 페이지 컴포넌트
-│   │   ├── Home.jsx        # 메인 페이지 (일기 목록, 월별 조회)
-│   │   ├── New.jsx         # 일기 작성 페이지
-│   │   ├── Diary.jsx       # 일기 상세 조회 페이지
-│   │   ├── Edit.jsx        # 일기 수정 페이지
-│   │   └── Notfound.jsx    # 404 페이지
+│   │   ├── Home.tsx        # 메인 페이지 (일기 목록, 월별 조회)
+│   │   ├── New.tsx         # 일기 작성 페이지
+│   │   ├── Diary.tsx       # 일기 상세 조회 페이지
+│   │   ├── Edit.tsx        # 일기 수정 페이지
+│   │   └── Notfound.tsx    # 404 페이지
 │   ├── components/         # 재사용 가능한 컴포넌트
-│   │   ├── Button.jsx      # 버튼 컴포넌트
-│   │   ├── Header.jsx      # 헤더 컴포넌트
-│   │   ├── Editor.jsx      # 일기 작성/수정 에디터
-│   │   ├── Viewer.jsx      # 일기 상세 조회 뷰어
-│   │   ├── DiaryList.jsx   # 일기 목록 컴포넌트
-│   │   ├── DiaryItem.jsx   # 일기 아이템 컴포넌트
-│   │   └── EmotionItem.jsx # 감정 선택 아이템 컴포넌트
+│   │   ├── Button.tsx      # 버튼 컴포넌트
+│   │   ├── Header.tsx      # 헤더 컴포넌트
+│   │   ├── Editor.tsx      # 일기 작성/수정 에디터
+│   │   ├── Viewer.tsx      # 일기 상세 조회 뷰어
+│   │   ├── DiaryList.tsx   # 일기 목록 컴포넌트
+│   │   ├── DiaryItem.tsx   # 일기 아이템 컴포넌트
+│   │   └── EmotionItem.tsx # 감정 선택 아이템 컴포넌트
 │   ├── hooks/              # 커스텀 훅
-│   │   ├── useDiary.jsx    # 일기 데이터 관리 훅
-│   │   └── usePageTitle.jsx # 페이지 타이틀 관리 훅
+│   │   ├── useDiary.tsx    # 일기 데이터 관리 훅
+│   │   └── usePageTitle.tsx # 페이지 타이틀 관리 훅
 │   ├── util/               # 유틸리티 함수
-│   │   ├── constants.js    # 상수 정의 (감정 목록 등)
-│   │   ├── get-emotion-image.js # 감정 이미지 가져오기
-│   │   └── get-stringed-date.js # 날짜 포맷팅
+│   │   ├── constants.ts    # 상수 정의 (감정 목록 등)
+│   │   ├── get-emotion-image.ts # 감정 이미지 가져오기
+│   │   └── get-stringed-date.ts # 날짜 포맷팅
 │   ├── assets/             # 이미지, 폰트 등 리소스
 │   │   └── emotion*.png    # 감정 아이콘 이미지
-│   ├── App.jsx             # 메인 앱 컴포넌트 (라우팅, Context)
-│   ├── main.jsx            # 애플리케이션 진입점
+│   ├── App.tsx             # 메인 앱 컴포넌트 (라우팅, Context)
+│   ├── main.tsx            # 애플리케이션 진입점
 │   └── index.css           # 전역 스타일
 ├── public/                 # 정적 파일
 │   └── NanumPenScript-Regular.ttf # 나눔펜 폰트
 ├── index.html              # HTML 템플릿
 ├── package.json            # 프로젝트 의존성
-└── vite.config.js          # Vite 설정
+└── vite-env.d.ts           # 이미지 파일 타입 선언
+└── vite.config.ts          # Vite 설정
 ```
 
 ---
