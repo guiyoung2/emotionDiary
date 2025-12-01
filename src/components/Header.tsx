@@ -1,6 +1,7 @@
 import "./Header.css";
+import { HeaderProps } from "../types";
 
-const Header = ({ title, leftChild, rightChild }) => {
+const Header = ({ title, leftChild, rightChild }: HeaderProps) => {
   return (
     <header className="header">
       <div className="header_left">{leftChild}</div>

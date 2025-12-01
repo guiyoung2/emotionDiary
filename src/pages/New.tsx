@@ -5,13 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DiaryDispatchContext } from "../App";
 import usePageTitle from "../hooks/usePageTitle";
+import { EditorInput } from "../types";
 
 const New = () => {
-  const { onCreate } = useContext(DiaryDispatchContext);
+  const dispatchContext = useContext(DiaryDispatchContext);
   const nav = useNavigate();
   usePageTitle("새 일기 쓰기");
 
-  const onSubmit = (input) => {
+  if (!dispatchContext) {
+    return null;
+  }
+
+  const { onCreate } = dispatchContext;
+
+  const onSubmit = (input: EditorInput) => {
     onCreate(input.createdDate.getTime(), input.emotionId, input.content);
     nav("/", { replace: true });
   };

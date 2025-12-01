@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { emotionList } from "../util/constants";
 import { getStringedDate } from "../util/get-stringed-date";
+import { EditorProps, EditorInput } from "../types";
 
-const Editor = ({ initData, onSubmit }) => {
-  const [input, setInput] = useState({
+const Editor = ({ initData, onSubmit }: EditorProps) => {
+  const [input, setInput] = useState<EditorInput>({
     createdDate: new Date(),
     emotionId: 3,
     content: "",
@@ -15,7 +16,6 @@ const Editor = ({ initData, onSubmit }) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (initData) {
       setInput({
         ...initData,
@@ -24,19 +24,29 @@ const Editor = ({ initData, onSubmit }) => {
     }
   }, [initData]);
 
-  const onChangeInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+  const onChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
     // 그냥 value값을 받아오면 YYYY-MM-DD 형식이므로 이를 날짜 객체로 변환
     if (name === "createdDate") {
-      value = new Date(value);
+      setInput({
+        ...input,
+        createdDate: new Date(value),
+      });
+    } else if (name === "emotionId") {
+      setInput({
+        ...input,
+        emotionId: Number(value),
+      });
+    } else if (name === "content") {
+      setInput({
+        ...input,
+        content: value,
+      });
     }
-
-    setInput({
-      ...input,
-      [name]: value,
-    });
   };
 
   const onClickSubmitButton = () => {
@@ -59,14 +69,12 @@ const Editor = ({ initData, onSubmit }) => {
         <div className="emotion_list_wrapper">
           {emotionList.map((item) => (
             <EmotionItem
-              onClick={() =>
-                onChangeInput({
-                  target: {
-                    name: "emotionId",
-                    value: item.emotionId,
-                  },
-                })
-              }
+              onClick={() => {
+                setInput({
+                  ...input,
+                  emotionId: item.emotionId,
+                });
+              }}
               key={item.emotionId}
               {...item}
               isSelected={item.emotionId === input.emotionId}

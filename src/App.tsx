@@ -6,8 +6,9 @@ import New from "./pages/New";
 import Diary from "./pages/Diary";
 import Edit from "./pages/Edit";
 import Notfound from "./pages/Notfound";
+import { DiaryItem, ReducerAction, DiaryDispatch } from "./types";
 
-function reducer(state, action) {
+function reducer(state: DiaryItem[], action: ReducerAction): DiaryItem[] {
   let nextState;
 
   switch (action.type) {
@@ -39,8 +40,12 @@ function reducer(state, action) {
   return nextState;
 }
 
-export const DiaryStateContext = createContext();
-export const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext<DiaryItem[] | undefined>(
+  undefined
+);
+export const DiaryDispatchContext = createContext<DiaryDispatch | undefined>(
+  undefined
+);
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +59,7 @@ function App() {
       return;
     }
 
-    const parsedData = JSON.parse(storedData);
+    const parsedData: DiaryItem[] = JSON.parse(storedData);
     if (!Array.isArray(parsedData)) {
       setIsLoading(false);
       return;
@@ -74,38 +79,46 @@ function App() {
       type: "INIT",
       data: parsedData,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     setIsLoading(false);
   }, []);
   // 새로운 일기 추가
-  const onCreate = (createdDate, emotionId, content) => {
+  const onCreate = (
+    createdDate: number,
+    emotionId: number,
+    content: string
+  ) => {
     dispatch({
       type: "CREATE",
       data: {
         id: idRef.current++,
-        createdDate,
+        createdDate: String(createdDate),
         emotionId,
         content,
       },
     });
   };
   // 새로운 일기 수정
-  const onUpdate = (id, createdDate, emotionId, content) => {
+  const onUpdate = (
+    id: number | string,
+    createdDate: number,
+    emotionId: number,
+    content: string
+  ) => {
     dispatch({
       type: "UPDATE",
       data: {
-        id,
-        createdDate,
+        id: Number(id),
+        createdDate: String(createdDate),
         emotionId,
         content,
       },
     });
   };
   // 새로운 일기 삭제
-  const onDelete = (id) => {
+  const onDelete = (id: number | string) => {
     dispatch({
       type: "DELETE",
-      data: { id },
+      data: { id: Number(id) },
     });
   };
 

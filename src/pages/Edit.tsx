@@ -2,29 +2,36 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import Editor from "../components/Editor";
-import { useContext, useEffect, useState } from "react";
-import { DiaryDispatchContext, DiaryStateContext } from "../App";
+import { useContext } from "react";
+import { DiaryDispatchContext } from "../App";
 import useDiary from "../hooks/useDiary";
 import usePageTitle from "../hooks/usePageTitle";
+import { EditorInput } from "../types";
 
 const Edit = () => {
-  const params = useParams();
+  const params = useParams<{ id: string }>();
   const nav = useNavigate();
-  const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
+  const dispatchContext = useContext(DiaryDispatchContext);
   const curDiaryItem = useDiary(params.id);
   usePageTitle(`${params.id}번 일기 수정`);
 
+  if (!dispatchContext) {
+    return null;
+  }
+
+  const { onDelete, onUpdate } = dispatchContext;
+
   const onClickDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      onDelete(params.id);
+      onDelete(Number(params.id));
       nav("/", { replace: true });
     }
   };
 
-  const onSubmit = (input) => {
+  const onSubmit = (input: EditorInput) => {
     if (window.confirm("정말 수정하시겠습니까?")) {
       onUpdate(
-        params.id,
+        Number(params.id),
         input.createdDate.getTime(),
         input.emotionId,
         input.content

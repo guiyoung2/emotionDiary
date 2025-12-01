@@ -1,4 +1,6 @@
-export const emotionList = [
+import { EmotionItem } from "../types";
+
+export const emotionList: EmotionItem[] = [
   {
     emotionId: 1,
     emotionName: "완전 좋음",

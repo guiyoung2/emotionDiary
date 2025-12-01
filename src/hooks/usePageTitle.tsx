@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 
-const usePageTitle = (title) => {
+const usePageTitle = (title: string): void => {
   useEffect(() => {
     const $title = document.getElementsByTagName("title")[0];
-    $title.innerText = title;
+    if ($title) {
+      $title.innerText = title;
+    }
   }, [title]);
 };
 

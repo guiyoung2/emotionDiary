@@ -4,8 +4,9 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 import usePageTitle from "../hooks/usePageTitle";
+import { DiaryItem } from "../types";
 
-const getMonthlyData = (pivotDate, data) => {
+const getMonthlyData = (pivotDate: Date, data: DiaryItem[]): DiaryItem[] => {
   const beginTime = new Date(
     pivotDate.getFullYear(),
     pivotDate.getMonth(),
@@ -24,7 +25,9 @@ const getMonthlyData = (pivotDate, data) => {
   ).getTime();
 
   return data.filter(
-    (item) => beginTime <= item.createdDate && item.createdDate <= endTime
+    (item) =>
+      beginTime <= Number(item.createdDate) &&
+      Number(item.createdDate) <= endTime
   );
 };
 
@@ -32,6 +35,10 @@ const Home = () => {
   const data = useContext(DiaryStateContext);
   const [pivotDate, setPivotDate] = useState(new Date());
   usePageTitle("Emotion Diary");
+
+  if (!data) {
+    return null;
+  }
 
   const monthlyData = getMonthlyData(pivotDate, data);
 

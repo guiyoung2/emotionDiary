@@ -1,20 +1,21 @@
 import Button from "./Button";
-import DiaryItem from "./DiaryItem";
+import DiaryItemComponent from "./DiaryItem";
 import "./DiaryList.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { DiaryListProps, DiaryItem, SortType } from "../types";
 
-const DiaryList = ({ data }) => {
+const DiaryList = ({ data }: DiaryListProps) => {
   const nav = useNavigate();
 
-  const [sortType, setSortType] = useState("latest");
+  const [sortType, setSortType] = useState<SortType>("latest");
 
-  const onChangeSortType = (e) => {
-    setSortType(e.target.value);
+  const onChangeSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortType(e.target.value as SortType);
   };
 
-  const getSortedData = () => {
-    return data.toSorted((a, b) => {
+  const getSortedData = (): DiaryItem[] => {
+    return [...data].sort((a: DiaryItem, b: DiaryItem) => {
       if (sortType === "latest") {
         return Number(b.createdDate) - Number(a.createdDate);
       } else {
@@ -40,7 +41,7 @@ const DiaryList = ({ data }) => {
       </div>
       <div className="list_wrapper">
         {sortedData.map((item) => (
-          <DiaryItem key={item.id} {...item} />
+          <DiaryItemComponent key={item.id} {...item} />
         ))}
       </div>
     </div>
