@@ -47,6 +47,28 @@ export const DiaryDispatchContext = createContext<DiaryDispatch | undefined>(
   undefined
 );
 
+const tempDiaryData: DiaryItem[] = [
+  {
+    id: 1,
+    createdDate: String(new Date(2026, 1, 19).getTime()),
+    emotionId: 4,
+    content: "매달 결제되는 ott, 카드값 지출이 마음이 아프다",
+  },
+  {
+    id: 2,
+    createdDate: String(new Date(2026, 1, 24).getTime()),
+    emotionId: 3,
+    content:
+      "넥스트, 리액트를 잘 하려면 근본인 자바스크립트부터 꼼꼼히 공부해야겠다",
+  },
+  {
+    id: 3,
+    createdDate: String(new Date(2026, 1, 26).getTime()),
+    emotionId: 1,
+    content: "오늘 새로운 회사에서 면접 제의가 왔다!",
+  },
+];
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, dispatch] = useReducer(reducer, []);
@@ -55,6 +77,12 @@ function App() {
   useEffect(() => {
     const storedData = localStorage.getItem("diary");
     if (!storedData) {
+      idRef.current = tempDiaryData.length + 1;
+      localStorage.setItem("diary", JSON.stringify(tempDiaryData));
+      dispatch({
+        type: "INIT",
+        data: tempDiaryData,
+      });
       setIsLoading(false);
       return;
     }
