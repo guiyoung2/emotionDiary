@@ -6,6 +6,7 @@ import { DiaryItemProps } from "../types";
 
 const DiaryItem = ({ id, createdDate, emotionId, content }: DiaryItemProps) => {
   const nav = useNavigate();
+  const createdDateNumber = Number(createdDate);
 
   return (
     <div className="DiaryItem">
@@ -17,7 +18,7 @@ const DiaryItem = ({ id, createdDate, emotionId, content }: DiaryItemProps) => {
       </div>
       <div onClick={() => nav(`/diary/${id}`)} className="info_section">
         <div className="created_date">
-          {new Date(createdDate).toLocaleDateString()}
+          {new Date(createdDateNumber).toLocaleDateString()}
         </div>
         <div className="content">{content}</div>
       </div>

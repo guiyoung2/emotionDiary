@@ -18,7 +18,7 @@ const Diary = () => {
   }
 
   const { createdDate, emotionId, content } = curDiaryItem;
-  const title = getStringedDate(new Date(createdDate));
+  const title = getStringedDate(new Date(Number(createdDate)));
 
   return (
     <div>

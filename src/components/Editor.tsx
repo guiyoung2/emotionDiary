@@ -32,9 +32,10 @@ const Editor = ({ initData, onSubmit }: EditorProps) => {
 
     // 그냥 value값을 받아오면 YYYY-MM-DD 형식이므로 이를 날짜 객체로 변환
     if (name === "createdDate") {
+      const [year, month, date] = value.split("-").map(Number);
       setInput({
         ...input,
-        createdDate: new Date(value),
+        createdDate: new Date(year, month - 1, date),
       });
     } else if (name === "emotionId") {
       setInput({
